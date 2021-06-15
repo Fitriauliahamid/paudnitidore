@@ -84,7 +84,7 @@
                                           {% endfor %}
                         
                                           {% if datasekolah.has_next %}
-                                          <li class="page-item"><a class="page-link" href="{{ url_for('guser.datasekolah', page=datasekolahh.next_num)}}">Next</a></li>
+                                          <li class="page-item"><a class="page-link" href="{{ url_for('guser.datasekolah', page=datasekolah.next_num)}}">Next</a></li>
                                           {% else %}
                                           <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
                                           {% endif %}
