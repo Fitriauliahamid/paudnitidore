@@ -195,8 +195,8 @@ a:focus {
     .navbar-light .navbar-nav .nav-link:focus {
         padding: 10px 10px 8px 10px;
         color: #ffffff;
-        font-size: 15px;
-        font-weight: 500;
+        font-size: 10px;
+        font-weight: 500px;
     }
     
     .navbar-light.nav-sticky .navbar-nav .nav-link,

@@ -73,7 +73,7 @@ def profill_edit(ed_id):
         dataprofil.misi=form.misi.data   
         db.session.commit()
         flash('Data Berhasil Di ubah','warning')
-        return redirect(url_for('gadmin.profil'))
+        return redirect(url_for('gadmin.profill'))
     return render_template("t_admin/sambutan-edit.html", form=form)
 
 @gadmin.route("/detail-profil/<int:ed_id>/detail", methods=['GET', 'POST'])
@@ -245,7 +245,7 @@ def dataumum_edit(ed_id):
         dataumum.jrombel=form.jlh_rombel.data  
         db.session.commit()
         flash('Data Berhasil Di ubah','warning')
-        return redirect(url_for('gadmin.dataumum'))
+        return redirect(url_for('gadmin.dataumuum'))
     return render_template("t_admin/data-umumedit.html", form=form)
 
 @gadmin.route("/detail-dataumum/<int:ed_id>/detail", methods=['GET', 'POST'])
@@ -580,7 +580,7 @@ def informasiedit(ed_id):
         return redirect(url_for('gadmin.informasi'))
     return render_template("t_admin/informasi-edit.html", form=form,dataadmin=dataadmin)
 
-@gadmin.route("/detail-informasi/<int:ed_id>/detail", methods=['GET', 'POST'])
+@gadmin.route("/detail-informasiadmin/<int:ed_id>/detail", methods=['GET', 'POST'])
 @login_required
 def informasi_detail(ed_id):
     dataadmin=Tadmin.query.all()
