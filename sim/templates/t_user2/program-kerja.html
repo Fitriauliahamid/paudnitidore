@@ -1,0 +1,107 @@
+{% extends "t_user2/base.html" %}
+
+{% block konten%}
+<section id="works">
+
+    <div class="container">
+        
+        <!-- section title -->
+        <h2 class="section-title wow fadeInUp">Program Kerja</h2>
+
+        <div class="spacer" data-height="60"></div>
+
+        <div class="container">
+                
+            
+            <div class="row">
+
+
+                <div class="col-md-12 triangle-left-md triangle-top-sm">
+                    <div class="rounded bg-white shadow-dark padding-30">
+                        <div class="row">
+                            <form action="" method="POST" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search pb-4">
+                                <div class="input-group">
+                                  <input type="text" class="form-control bg-light border-0 small" placeholder="ketik Judul ..."
+                                      aria-label="Cari" aria-describedby="basic-addon2" name="tag" id="tag">
+                                  <div class="input-group-append">
+                                    <input class="btn btn-primary" type="submit" value="Cari">
+                                  </div>
+                                </div>
+                              </form>
+                              <strong style="padding-left: 20px;">Cari Untuk : {{ tag }}</strong>
+                            <div class="col-md-12">
+                                <!-- about text -->
+                                <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="2">
+                                    <thead>
+                                        <tr align="center" style="background-color: rgb(252, 159, 98);">
+                                            <th>Tahun</th>
+                                            <th>Tanggal Post</th>
+                                            <th>Judul</th>
+                                            <th>Program</th>
+                                            <th>Bidang</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                    </tfoot>
+                                    <tbody>
+                                        {% for data in datakegiatan.items %}
+                                        <tr>
+                                            <td><b>{{data.tahun}}</b></td>
+                                            <td>{{data.tgl_post}}</td>
+                                            <td>{{data.judul}}</td>
+                                            <td>{{data.program}}</td>
+                                            <td>{{data.bidang}}</td>
+                                            <td><button>{{data.status}}</button></td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                    </table>
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination">
+                                          {% if datakegiatan.has_prev %}
+                                            <li class="page-item"><a class="page-link" href="{{ url_for('guser.datakegiatan', page=datakegiatan.prev_num)}}">Previous</a></li>
+                                          {% else %}
+                                            <li class="page-item disabled"><a class="page-link">Previous</a>
+                                          {% endif %}
+                                            </li>
+                        
+                                          {% for page in datakegiatan.iter_pages(left_edge=3, right_edge=3) %}
+                                          {% if page %}
+                                              {% if page==datakegiatan.page %}
+                                              <li class="page-item active"><a class="page-link" href="{{ url_for('guser.datakegiatan', page=page)}}">{{ page }}</a></li>
+                                              {% else %}
+                                              <li class="page-item"><a class="page-link" href="{{ url_for('guser.datakegiatan', page=page)}}">{{ page }}</a></li>
+                                              {% endif %}
+                                          {% else %}
+                                             <li class="page-item disabled" id="example_ellipsis"><a class="page-link" href="#">...</a></li>
+                                          {% endif %}
+                                          {% endfor %}
+                        
+                                          {% if datakegiatan.has_next %}
+                                          <li class="page-item"><a class="page-link" href="{{ url_for('guser.datakegiatan', page=datakegiatan.next_num)}}">Next</a></li>
+                                          {% else %}
+                                          <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                                          {% endif %}
+                                        </ul>
+                                      </nav>
+                                <div class="spacer d-md-none d-lg-none" data-height="30"></div>
+                            </div>
+                            <a class="btn btn-warning" href="{{url_for('guser.home')}}">Kembali</a>
+                           
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+            <!-- row end -->
+
+            <div class="spacer" data-height="70"></div>
+        
+        </div>
+  
+
+    </div>
+
+</section>
+{% endblock%}

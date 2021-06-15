@@ -1,0 +1,68 @@
+{% extends "t_user2/base.html" %}
+
+{% block konten%}
+<div class="experience" id="experience">
+    <div class="container">
+        <header class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+            <h2>Berita Terbaru</h2>
+        </header>
+        <form action="" method="POST" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search pb-4">
+            <div class="input-group">
+              <input type="text" class="form-control bg-light border-0 small" placeholder="Cari dengan Judul ..."
+                  aria-label="Cari" aria-describedby="basic-addon2" name="tag" id="tag">
+              <div class="input-group-append">
+                <input class="btn btn-primary" type="submit" value="Cari">
+              </div>
+            </div>
+          </form>
+          <strong style="padding-left: 20px;">Cari Untuk : {{ tag }}</strong>
+        {% for data in berita.items %}
+        <div class="timeline">
+            <div class="timeline-item left wow slideInRight" data-wow-delay="0.1s">
+                <div class="timeline-text">
+                    <div class="timeline-date">{{data.tgl_post}}</div>
+                    <h2>{{data.judul}}</h2> <p><img src="{{url_for('static', filename='foto/' +data.foto)}}" alt="..." width="150px"></p>
+                    <h4>{{data.berita}}</h4>
+                    <button style="background-color: red;"><a href="{{url_for('guser.berita_detail', ed_id=data.id)}}">Detail</a></button>
+                </div>
+            </div>  
+        </div>
+        {% endfor %}
+        <div class="timeline">
+            <div class="timeline-item right wow slideInLeft" data-wow-delay="0.1s">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                      {% if berita.has_prev %}
+                        <li class="page-item"><a class="page-link" href="{{ url_for('guser.berita', page=berita.prev_num)}}">Previous</a></li>
+                      {% else %}
+                        <li class="page-item disabled"><a class="page-link">Previous</a>
+                      {% endif %}
+                        </li>
+            
+                      {% for page in berita.iter_pages(left_edge=3, right_edge=3) %}
+                      {% if page %}
+                          {% if page==berita.page %}
+                          <li class="page-item active"><a class="page-link" href="{{ url_for('guser.berita', page=page)}}">{{ page }}</a></li>
+                          {% else %}
+                          <li class="page-item"><a class="page-link" href="{{ url_for('guser.berita', page=page)}}">{{ page }}</a></li>
+                          {% endif %}
+                      {% else %}
+                         <li class="page-item disabled" id="example_ellipsis"><a class="page-link" href="#">...</a></li>
+                      {% endif %}
+                      {% endfor %}
+            
+                      {% if berita.has_next %}
+                      <li class="page-item"><a class="page-link" href="{{ url_for('guser.berita', page=berita.next_num)}}">Next</a></li>
+                      {% else %}
+                      <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                      {% endif %}
+                    </ul>
+                  </nav>
+            </div>
+        </div>
+        
+    </div>
+
+   
+</div>
+{% endblock%}

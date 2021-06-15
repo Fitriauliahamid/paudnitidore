@@ -1,0 +1,128 @@
+{% extends "t_admin/base.html" %}
+
+{% block konten%}
+    
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+    
+                        <!-- Page Heading -->
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800">Profil</h1>
+                            <!--bagian bisa dimasukan form seacrh dari masing-masing data-->
+                            <p></p>
+                        </div>
+    
+                        <!-- Content Row -->
+                    
+                        <div class="row">
+    
+    
+                            <!-- Input Kategori -->
+                            <div class="col-xl-8 col-lg-7">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div
+                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">Data Profil</h6>
+                                        
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <div class="card-body">
+                                            <form method="POST">
+                                                {{form.hidden_tag()}}
+                                                <div class="form-group">
+                                                    {{form.sambutan.label(class="form-control-label")}}
+                                                    {% if form.sambutan.errors %}
+                                                         {{form.sambutan(class="form-control is-invalid")}}
+                                                
+                                                         <div class="invalid-feedback">
+                                                             {%for error in form.sambutan.errors %}
+                                                             <span>{{error}}</span>
+                                                             {% endfor %}
+                                                         </div>
+                                                    {%else%}
+                                                        {{form.sambutan(class="form-control")}}
+                                                    
+                                                    {%endif%}
+                                                </div>
+                                                <div class="form-group">
+                                                    {{form.visi.label(class="form-control-label")}}
+                                                    {% if form.visi.errors %}
+                                                         {{form.visi(class="form-control is-invalid")}}
+                                                
+                                                         <div class="invalid-feedback">
+                                                             {%for error in form.visi.errors %}
+                                                             <span>{{error}}</span>
+                                                             {% endfor %}
+                                                         </div>
+                                                    {%else%}
+                                                        {{form.visi(class="form-control")}}
+                                                    
+                                                    {%endif%}
+                                                </div>
+                                                <div class="form-group">
+                                                    {{form.misi.label(class="form-control-label")}}
+                                                    {% if form.misi.errors %}
+                                                         {{form.misi(class="form-control is-invalid")}}
+                                                
+                                                         <div class="invalid-feedback">
+                                                             {%for error in form.misi.errors %}
+                                                             <span>{{error}}</span>
+                                                             {% endfor %}
+                                                         </div>
+                                                    {%else%}
+                                                        {{form.misi(class="form-control")}}
+                                                    
+                                                    {%endif%}
+                                                </div>
+                                                <div class="form-group">
+                                                    {{form.submit(class="btn btn-primary")}}
+                                                </div>    
+                                            </form>
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                                                    <thead>
+                                                        <tr align="center">
+                                                            <th rowspan="2">Sambutan</th>
+                                                            <th rowspan="2">visi</th>
+                                                            <th rowspan="2">misi</th>
+                                                            <th colspan="3">Keterangan</th>
+                                                        </tr>
+                                                        <tr align="center">
+                                                            <th>Edit</th>
+                                                            <th>Detail</th>
+                                                            <th>Hapus</th>
+    
+                                                        </tr>
+                                                    </thead>
+                                                    <tfoot>
+                                   
+                                                    </tfoot>
+                                                    <tbody>
+                                                        {% for dk in dataprofil %}
+                                                        <tr>
+                                                            <td>{{dk.sambutan|striptags}}</td>
+                                                            <td>{{dk.visi|striptags}}</td>
+                                                            <td>{{dk.misi|striptags}}</td>
+                                                            <td><a class="btn btn-sm btn-warning" href="{{url_for('gadmin.profill_edit', ed_id=dk.id)}}">Edit</a></td>
+                                                            <td><a class="btn btn-sm btn-warning" href="{{url_for('gadmin.detail_profil', ed_id=dk.id)}}">detail</a></td>
+                                                            <td> <a class="btn btn-sm btn-danger" href="/profil/{{dk.id}}">Hapus</a></td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                    </tbody>
+                                                    </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+    </div></div>      
+    
+    </div>
+              
+    <!-- /.container-fluid -->
+    {{ckeditor.load()}}
+    {{ckeditor.config(name='sambutan')}}  
+{% endblock%}
+    

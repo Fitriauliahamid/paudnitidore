@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>PAUD - Kota Tidore</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Free Website Template" name="keywords">
+        <meta content="Free Website Template" name="description">
+
+        <!-- Favicon -->
+        <link href="{{ url_for ('static', filename="tuser2/img/logo_tidore.png")}}" rel="icon">
+        <link rel="stylesheet" href="{{ url_for ('static', filename="tuser/css/bootstrap.min.css")}}" type="text/css" media="all">
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for ('static', filename="tuser2/lib/animate/animate.min.css")}}" type="text/css" media="all">
+        <link rel="stylesheet" href="{{ url_for ('static', filename="tuser2/lib/owlcarousel/assets/owl.carousel.min.css")}}" type="text/css" media="all">
+        <link rel="stylesheet" href="{{ url_for ('static', filename="tuser2/lib/lightbox/css/lightbox.min.css")}}" type="text/css" media="all">
+
+        <!-- Template Stylesheet -->
+        
+        
+        <link rel="stylesheet" href="{{ url_for ('static', filename="tuser2/css/style.css")}}" type="text/css" media="all">
+    </head>
+
+    <body data-spy="scroll" data-target=".navbar" data-offset="51">
+        <!-- Nav Bar Start -->
+        <div class="navbar navbar-expand-lg bg-light navbar-light">
+            <div class="container-fluid">
+                <a href="index.html" class="navbar-brand">PAUD-Kota Tidore</a>
+                    <img src="{{ url_for ('static', filename="tuser2/img/paud2.png")}}" alt="logo Paud" width="60px">
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto">
+                        <a href="{{url_for('guser.home')}}" class="nav-item nav-link active">Home</a>
+                        <a href="{{url_for('guser.profill')}}" class="nav-item nav-link" >About</a>
+                        <a href="{{url_for('guser.home')}}" class="nav-item nav-link">Layanan</a>
+                        <a href="{{url_for('guser.datainformasi')}}" class="nav-item nav-link">Informasi</a>
+                        <a href="{{url_for('guser.berita')}}" class="nav-item nav-link">Berita</a>
+                        <a href="{{url_for('guser.datakegiatan')}}" class="nav-item nav-link">Program Kerja</a>
+                        <a href="{{url_for('guser.sorganisasi')}}" class="nav-item nav-link">Struktur Organisasi</a>
+                        <a href="landing.html#blog" class="nav-item nav-link">Blog</a>
+                        <a href="landing.html#review" class="nav-item nav-link">Review</a>
+                        <a href="{{url_for('guser.base')}}" class="nav-item nav-link">Contact</a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <!-- Nav Bar End -->
+
+
+        <!-- Hero Start -->
+        <div class="hero" id="home">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-sm-12 col-md-6">
+                        
+                        <div class="hero-content">
+                               
+                            <div class="hero-text">   
+                                <p>Bidang PAUD</p>
+                                <h1 class="">Dinas Pendidikan Kota Tidore</h1>
+                                <h2></h2>
+                                <div class="typed-text">Selamat Datang ! , Sistem Informasi PAUD-Tikep, Pendidikan Anak Usia Dini, |PAUD-Sehat-Cerdas-Ceria, </div>
+                            </div>
+                            <div class="hero-btn">
+                                <a class="btn" href="{{url_for('guser.datasekolah')}}">Data Sekolah</a>
+                                <a class="btn" href="{{url_for('guser.base')}}">Pengaduan</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 d-none d-md-block">
+                        <div class="hero-image">
+                            <img src="{{ url_for ('static', filename="tuser2/img/logo_tidore.png")}}" alt="Hero Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Hero End -->
+
+
+        {% with messages= get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                {% for category, massage in messages %}
+
+                <div class="alert alert-{{category}}">
+                        {{massage}}
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+
+                {% block dasboard%}
+                {% endblock %}
+
+                {% block footer%}
+                {% endblock %}
+
+                {% block konten%}
+                <div class="contact wow fadeInUp" data-wow-delay="0.1s" id="contact">
+                    <div class="container-fluid">
+                        <div class="container">
+                            <div class="row align-items-center">
+                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="contact-form">
+                                        <div id="success"></div>
+                                        <form method="POST" enctype="multipart/form-data" style="color: aliceblue;" >
+                                                    {{form.hidden_tag()}}
+                                                <div class="form-group">
+        
+                                                    {{form.email.label(class="form-control-label")}}
+                                                    {% if form.email.errors %}
+                                                         {{form.email(class="form-control is-invalid")}}
+                                                
+                                                         <div class="invalid-feedback">
+                                                             {%for error in form.email.errors %}
+                                                             <span>{{error}}</span>
+                                                             {% endfor %}
+                                                         </div>
+                                                    {%else%}
+                                                        {{form.email(class="form-control")}}
+                                                    
+                                                    {%endif%}
+                                                </div>
+                                                  <div class="form-group">
+                                                {{form.kategori.label(class="form-control-label")}}
+                                                {% if form.kategori.errors %}
+                                                     {{form.kategori(class="form-control is-invalid")}}
+                                            
+                                                     <div class="invalid-feedback">
+                                                         {%for error in form.kategori.errors %}
+                                                         <span>{{error}}</span>
+                                                         {% endfor %}
+                                                     </div>
+                                                {%else%}
+                                                    {{form.kategori(class="form-control")}}
+                                                
+                                                {%endif%}
+                                            </div>
+                                            <div class="form-group"> 
+                                                {{form.detail_pengaduan.label(class="form-control-label")}}
+                                                {% if form.detail_pengaduan.errors %}
+                                                    {{form.detail_pengaduan(class="form-control is-invalid")}}
+                                        
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.detail_pengaduan.errors %}
+                                                    <span>{{error}}</span>
+                                                    {% endfor %}
+                                                </div>
+                                                {% else %}
+                                                    {{form.detail_pengaduan(class="form-control")}}
+                                                {% endif %}
+                                            </div>
+                                            <div class="form-group" style="color: red;">
+                                                {{form.submit(class="btn btn-primary")}}
+                                            </div>
+                                        
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endblock %}
+
+            </div>
+        <!-- Footer Start -->
+        <div class="footer wow fadeIn" data-wow-delay="0.3s">
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="footer-info">
+                        <h1>-SISTEM INFORMASI-</h1>
+                        <h2>PENDIDIKAN ANAK USIA DINI</h2>
+                        <h3>KOTA TIDORE KEPULAUAN</h3>
+                        <div class="footer-menu">
+                            <p>+628-219-009-1585</p>
+                            <p>paudnitidore@gmail.com</p>
+                        </div>
+                        <div class="footer-social">
+                            <a href=""><i class="fab fa-twitter"></i></a>
+                            <a href=""><i class="fab fa-facebook-f"></i></a>
+                            <a href=""><i class="fab fa-youtube"></i></a>
+                            <a href=""><i class="fab fa-instagram"></i></a>
+                            <a href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="container copyright">
+                    <p>&copy; <a href="#">Tim-timan</a>, All Right Reserved | Designed By <a href="https://htmlcodex.com">Informatic of UMMU</a></p>
+                </div>
+            </div>
+        </div>
+        
+      
+        <!-- Footer End -->
+        
+        
+        <!-- Back to top button -->
+        <a href="#" class="btn back-to-top"><i class="fa fa-chevron-up"></i></a>
+        
+        
+        <!-- Pre Loader -->
+        <div id="loader" class="show">
+            <div class="loader"></div>
+        </div>
+
+        
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="{{ url_for ('static', filename="tuser2/lib/easing/easing.min.js")}}"></script>
+        <script src="{{ url_for ('static', filename="tuser2/lib/wow/wow.min.js")}}"></script>
+        <script src="{{ url_for ('static', filename="tuser2/lib/waypoints/waypoints.min.js")}}"></script>
+        <script src="{{ url_for ('static', filename="tuser2/lib/typed/typed.min.js")}}"></script>
+        <script src="{{ url_for ('static', filename="tuser2/lib/owlcarousel/owl.carousel.min.js")}}"></script>
+        <script src="{{ url_for ('static', filename="tuser2/lib/isotope/isotope.pkgd.min.js")}}"></script>
+        <script src="{{ url_for ('static', filename="tuser2/lib/lightbox/js/lightbox.min.js")}}"></script>
+        
+        
+        
+        <!-- Contact Javascript File -->
+        <script src="mail/jqBootstrapValidation.min.js"></script>
+        <script src="mail/contact.js"></script>
+
+        <!-- Template Javascript -->
+       
+        <script src="{{ url_for ('static', filename="tuser2/js/main.js")}}"></script>
+    </body>
+</html>

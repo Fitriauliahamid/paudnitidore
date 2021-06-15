@@ -1,0 +1,70 @@
+{% extends "t_admin/base.html" %}
+
+{% block konten%}
+    
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+    
+                   
+    
+                        <!-- Content Row -->
+                    
+                        <div class="row">
+    
+                            <!-- Data Kategori -->
+                            <div class="col-xl-6 col-lg-5">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div
+                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">Detail Data Informasi </h6>
+                                       
+                                    </div>
+                                    <!-- Card Body -->
+                                </div>
+                            </div>
+    
+                            <!-- Input Kategori -->
+                            <div class="col-xl-8 col-lg-7">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div
+                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">Data Informasi </h6>
+                                        
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table>
+                                                    <table class="table table-hover">
+                                                        <tr>
+                                                            <th>Jenis Tanggal:</th><td>{{datainformasi.tgl_post}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>judul:</th>
+                                                            <td>{{datainformasi.judul}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>informasi:</th>
+                                                            <td>{{datainformasi.informasi}}</td>
+                                                        </tr>
+                                                      
+                                                
+                                                    </table>
+                                                  </div>
+                                                  <a class="btn btn-warning" href="{{url_for('gadmin.informasi')}}">Kembali</a>
+                                                </table>
+                                               
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+    </div></div>      
+    
+    </div>
+                    <!-- /.container-fluid -->
+{% endblock%}
+    

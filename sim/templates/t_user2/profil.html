@@ -1,0 +1,69 @@
+{% extends "t_user2/base.html" %}
+
+{% block konten%}
+<section id="works">
+
+    <div class="container">
+        
+        <!-- section title -->
+        <h2 class="section-title wow fadeInUp">Profil</h2>
+
+        <div class="spacer" data-height="60"></div>
+
+        <div class="container">
+                
+            
+            <div class="row">
+
+
+                <div class="col-md-12 triangle-left-md triangle-top-sm">
+                    <div class="rounded bg-white shadow-dark padding-30">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- about text -->
+                               
+                                {% for data in dt_profil %}
+                                <table class="table table-hover">
+                                    <tr>
+                                        <th>Sambutan:</th>
+                                    </tr>
+									<tr>
+										<td>{{data.sambutan|striptags}}</td>
+									</tr>
+                                    <tr>
+                                        <th>Visi:</th>
+                                    </tr>
+									<tr>
+										<td>{{data.visi|striptags}}</td>
+									</tr>
+                                    <tr>
+                                        <th>Misi:</th>
+                                    </tr>
+                                    <tr>
+                                        <td>{{data.misi|striptags}}</td>
+                                    </tr>
+									{% endfor %}
+                                   
+                                   
+                                </table>
+                                
+                                <div class="spacer d-md-none d-lg-none" data-height="30"></div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+            <!-- row end -->
+
+            <div class="spacer" data-height="70"></div>
+        
+        </div>
+  
+
+    </div>
+
+</section>
+{{ckeditor.load()}}
+{% endblock%}

@@ -1,0 +1,126 @@
+{% extends "t_admin/base.html" %}
+
+{% block konten %}
+
+<div class="container-fluid">
+    
+                   
+    
+    <!-- Content Row -->
+
+    <div class="row">
+
+        <!-- Data Kategori -->
+        <div class="col-xl-6 col-lg-5">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Edit Data Profil</h6>
+                   
+                </div>
+                <!-- Card Body -->
+            </div>
+        </div>
+
+        <!-- Input Kategori -->
+        <div class="col-xl-8 col-lg-7">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Data Profil</h6>
+                    
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            
+                            <h1>Update Data Profil</h1>
+                            <form method="POST" enctype="multipart/form-data">
+                                {{form.hidden_tag()}}
+                            
+                                <div class="form-group">
+                                    {{form.nama.label(class="form-control-label")}}
+                                    {{form.nama(class="form-control")}}
+                                </div>
+                                <div class="form-group">
+                                    {{form.email.label(class="form-control-label")}}
+                                    {% if form.email.errors %}
+                                        {{form.email(class="form-control is-invalid")}}
+                                    <div class="invalid-feedback">
+                                         {% for error in form.email.errors %}
+                                        <span>{{error}}</span>
+                                        {% endfor %}
+                                    </div>
+                                    {%else%}
+                                         {{form.email(class="form-control")}}
+                                    {%endif%}
+                                </div>
+                            
+                                <div class="form-group"> 
+                                    {{form.password.label(class="form-control-label")}}
+                                    {% if form.password.errors %}
+                                        {{form.password(class="form-control is-invalid")}}
+                            
+                                    <div class="invalid-feedback">
+                                        {% for error in form.password.errors %}
+                                        <span>{{error}}</span>
+                                        {% endfor %}
+                                    </div>
+                                    {% else %}
+                                        {{form.password(class="form-control")}}
+                                    {% endif %}
+                                </div>
+                            
+                            
+                                <div class="form-group"> 
+                                    {{form.konf_pass.label(class="form-control-label")}}
+                                    {% if form.konf_pass.errors %}
+                                        {{form.konf_pass(class="form-control is-invalid")}}
+                            
+                                    <div class="invalid-feedback">
+                                        {% for error in form.konf_pass.errors %}
+                                        <span>{{error}}</span>
+                                        {% endfor %}
+                                    </div>
+                                    {% else %}
+                                        {{form.konf_pass(class="form-control")}}
+                                    {% endif %}
+                                </div>
+                            
+                                <div class="form-group"> 
+                                    {{form.foto.label(class="form-control-label")}}
+                                    {% if form.foto.errors %}
+                                        {{form.foto(class="form-control is-invalid")}}
+                            
+                                    <div class="invalid-feedback">
+                                        {% for error in form.foto.errors %}
+                                        <span>{{error}}</span>
+                                        {% endfor %}
+                                    </div>
+                                    {% else %}
+                                        {{form.foto(class="form-control")}}
+                                    {% endif %}
+                                </div>
+                            
+                                <div class="form-group">
+                                    {{form.submit(class="btn btn-primary")}}
+                                </div>
+                    
+                                    <a class="btn btn-warning" href="{{url_for('gadmin.detail_admin')}}">Kembali</a>
+                        
+                              </form>
+                           
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div></div>   
+ 
+{% endblock %}
+
+
+

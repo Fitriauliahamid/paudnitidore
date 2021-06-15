@@ -1,0 +1,159 @@
+{% extends "t_admin/base.html" %}
+
+{% block konten%}
+    
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+    
+                        <!-- Page Heading -->
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800">Edit Data Sekolah</h1>
+                            <!--bagian bisa dimasukan form seacrh dari masing-masing data-->
+                            <p></p>
+                        </div>
+    
+                        <!-- Content Row -->
+                    
+                        <div class="row">
+    
+                            <!-- Data Kategori -->
+                            <div class="col-xl-8 col-lg-5">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div
+                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">Input data</h6>
+                                       
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <!--form inputan-->
+                                       <form method="POST" enctype="multipart/form-data">
+                                        {{form.hidden_tag()}}
+                                        <div class="form-group">
+                                            {{form.npsn.label(class="form-control-label")}}
+                                            {% if form.npsn.errors %}
+                                                 {{form.npsn(class="form-control is-invalid")}}
+                                        
+                                                 <div class="invalid-feedback">
+                                                     {%for error in form.npsn.errors %}
+                                                     <span>{{error}}</span>
+                                                     {% endfor %}
+                                                 </div>
+                                            {%else%}
+                                                {{form.npsn(class="form-control")}}
+                                            
+                                            {%endif%}
+                                        </div>
+                                          <div class="form-group">
+                                        {{form.nama_sekolah.label(class="form-control-label")}}
+                                        {% if form.nama_sekolah.errors %}
+                                             {{form.nama_sekolah(class="form-control is-invalid")}}
+                                    
+                                             <div class="invalid-feedback">
+                                                 {%for error in form.nama_sekolah.errors %}
+                                                 <span>{{error}}</span>
+                                                 {% endfor %}
+                                             </div>
+                                        {%else%}
+                                            {{form.nama_sekolah(class="form-control")}}
+                                        
+                                        {%endif%}
+                                    </div>
+                                    <div class="form-group"> 
+                                        {{form.alamat.label(class="form-control-label")}}
+                                        {% if form.alamat.errors %}
+                                            {{form.alamat(class="form-control is-invalid")}}
+                                
+                                        <div class="invalid-feedback">
+                                            {% for error in form.alamat.errors %}
+                                            <span>{{error}}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                            {{form.alamat(class="form-control")}}
+                                        {% endif %}
+                                    </div>
+                                    <div class="form-group"> 
+                                        {{form.kecamatan.label(class="form-control-label")}}
+                                        {% if form.kecamatan.errors %}
+                                            {{form.kecamatan(class="form-control is-invalid")}}
+                                
+                                        <div class="invalid-feedback">
+                                            {% for error in form.kecamatan.errors %}
+                                            <span>{{error}}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                            {{form.kecamatan(class="form-control")}}
+                                        {% endif %}
+                                    </div>
+                                    <div class="form-group"> 
+                                        {{form.akreditas.label(class="form-control-label")}}
+                                        {% if form.akreditas.errors %}
+                                            {{form.akreditas(class="form-control is-invalid")}}
+                                
+                                        <div class="invalid-feedback">
+                                            {% for error in form.akreditas.errors %}
+                                            <span>{{error}}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                            {{form.akreditas(class="form-control")}}
+                                        {% endif %}
+                                    </div>
+                                    <div class="form-group"> 
+                                        {{form.jenis_sekolah.label(class="form-control-label")}}
+                                        {% if form.jenis_sekolah.errors %}
+                                            {{form.jenis_sekolah(class="form-control is-invalid")}}
+                                
+                                        <div class="invalid-feedback">
+                                            {% for error in form.jenis_sekolah.errors %}
+                                            <span>{{error}}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                            {{form.jenis_sekolah(class="form-control")}}
+                                        {% endif %}
+                                    </div>
+                                    <div class="form-group"> 
+                                        {{form.nama_kepsek.label(class="form-control-label")}}
+                                        {% if form.nama_kepsek.errors %}
+                                            {{form.nama_kepsek(class="form-control is-invalid")}}
+                                
+                                        <div class="invalid-feedback">
+                                            {% for error in form.nama_kepsek.errors %}
+                                            <span>{{error}}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                            {{form.nama_kepsek(class="form-control")}}
+                                        {% endif %}
+                                    </div>
+                                    <div class="form-group"> 
+                                        {{form.foto.label(class="form-control-label")}}
+                                        {% if form.foto.errors %}
+                                            {{form.foto(class="form-control is-invalid")}}
+                                
+                                        <div class="invalid-feedback">
+                                            {% for error in form.foto.errors %}
+                                            <span>{{error}}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                            {{form.foto(class="form-control")}}
+                                        {% endif %}
+                                    </div>
+                                    <div class="form-group">
+                                        {{form.submit(class="btn btn-primary")}}
+                                    </div>
+
+                                    </div>
+                                </div>
+                            </div>
+  
+    
+    </div>
+                    <!-- /.container-fluid -->
+{% endblock%}
+    

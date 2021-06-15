@@ -1,0 +1,202 @@
+{% extends "t_admin/base.html" %}
+
+{% block konten%}
+    
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+    
+                        <!-- Page Heading -->
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800"> Edit Data Umum</h1>
+                            <!--bagian bisa dimasukan form seacrh dari masing-masing data-->
+                            <p></p>
+                        </div>
+    
+                        <!-- Content Row -->
+                    
+                        <div class="row">
+    
+                            <!-- Data Kategori -->
+                            <div class="col-xl-8 col-lg-5">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div
+                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">Input data</h6>
+                                       
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <!--form inputan-->
+                                       <form method="POST">
+                                        {{form.hidden_tag()}}
+                                        <div class="form-group">
+                                            {{form.tahun.label(class="form-control-label")}}
+                                            {% if form.tahun.errors %}
+                                                 {{form.tahun(class="form-control is-invalid")}}
+                                        
+                                                 <div class="invalid-feedback">
+                                                     {%for error in form.tahun.errors %}
+                                                     <span>{{error}}</span>
+                                                     {% endfor %}
+                                                 </div>
+                                            {%else%}
+                                                {{form.tahun(class="form-control")}}
+                                            
+                                            {%endif%}
+                                        </div>
+                                        <div class="form-group">
+                                            {{form.jlh_sekolah.label(class="form-control-label")}}
+                                            {% if form.jlh_sekolah.errors %}
+                                                 {{form.jlh_sekolah(class="form-control is-invalid")}}
+                                        
+                                                 <div class="invalid-feedback">
+                                                     {%for error in form.jlh_sekolah.errors %}
+                                                     <span>{{error}}</span>
+                                                     {% endfor %}
+                                                 </div>
+                                            {%else%}
+                                                {{form.jlh_sekolah(class="form-control")}}
+                                            
+                                            {%endif%}
+                                        </div>
+                                          <div class="form-group">
+                                        {{form.jlh_sswasta.label(class="form-control-label")}}
+                                        {% if form.jlh_sswasta.errors %}
+                                             {{form.jlh_sswasta(class="form-control is-invalid")}}
+                                    
+                                             <div class="invalid-feedback">
+                                                 {%for error in form.jlh_sswasta.errors %}
+                                                 <span>{{error}}</span>
+                                                 {% endfor %}
+                                             </div>
+                                        {%else%}
+                                            {{form.jlh_sswasta(class="form-control")}}
+                                        
+                                        {%endif%}
+                                    </div>
+                                    <div class="form-group"> 
+                                        {{form.jlh_snegeri.label(class="form-control-label")}}
+                                        {% if form.jlh_snegeri.errors %}
+                                            {{form.jlh_snegeri(class="form-control is-invalid")}}
+                                
+                                        <div class="invalid-feedback">
+                                            {% for error in form.jlh_snegeri.errors %}
+                                            <span>{{error}}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                            {{form.jlh_snegeri(class="form-control")}}
+                                        {% endif %}
+                                    </div>
+                                    <div class="form-group"> 
+                                        {{form.jlh_guru.label(class="form-control-label")}}
+                                        {% if form.jlh_guru.errors %}
+                                            {{form.jlh_guru(class="form-control is-invalid")}}
+                                
+                                        <div class="invalid-feedback">
+                                            {% for error in form.jlh_guru.errors %}
+                                            <span>{{error}}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                            {{form.jlh_guru(class="form-control")}}
+                                        {% endif %}
+                                    </div>
+                                    <div class="form-group"> 
+                                        {{form.jlh_gpns.label(class="form-control-label")}}
+                                        {% if form.jlh_gpns.errors %}
+                                            {{form.jlh_gpns(class="form-control is-invalid")}}
+                                
+                                        <div class="invalid-feedback">
+                                            {% for error in form.jlh_gpns.errors %}
+                                            <span>{{error}}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                            {{form.jlh_gpns(class="form-control")}}
+                                        {% endif %}
+                                    </div>
+                                    <div class="form-group"> 
+                                        {{form.jlh_ghonor.label(class="form-control-label")}}
+                                        {% if form.jlh_ghonor.errors %}
+                                            {{form.jlh_ghonor(class="form-control is-invalid")}}
+                                
+                                        <div class="invalid-feedback">
+                                            {% for error in form.jlh_ghonor.errors %}
+                                            <span>{{error}}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                            {{form.jlh_ghonor(class="form-control")}}
+                                        {% endif %}
+                                    </div>
+                                    <div class="form-group"> 
+                                        {{form.jlh_kepsek.label(class="form-control-label")}}
+                                        {% if form.jlh_kepsek.errors %}
+                                            {{form.jlh_kepsek(class="form-control is-invalid")}}
+                                
+                                        <div class="invalid-feedback">
+                                            {% for error in form.jlh_kepsek.errors %}
+                                            <span>{{error}}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                            {{form.jlh_kepsek(class="form-control")}}
+                                        {% endif %}
+                                    </div>
+                                    <div class="form-group"> 
+                                        {{form.jlh_kpns.label(class="form-control-label")}}
+                                        {% if form.jlh_kpns.errors %}
+                                            {{form.jlh_kpns(class="form-control is-invalid")}}
+                                
+                                        <div class="invalid-feedback">
+                                            {% for error in form.jlh_kpns.errors %}
+                                            <span>{{error}}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                            {{form.jlh_kpns(class="form-control")}}
+                                        {% endif %}
+                                    </div>
+                                    <div class="form-group"> 
+                                        {{form.jlh_khonor.label(class="form-control-label")}}
+                                        {% if form.jlh_khonor.errors %}
+                                            {{form.jlh_khonor(class="form-control is-invalid")}}
+                                
+                                        <div class="invalid-feedback">
+                                            {% for error in form.jlh_khonor.errors %}
+                                            <span>{{error}}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                            {{form.jlh_khonor(class="form-control")}}
+                                        {% endif %}
+                                    </div>
+                                    <div class="form-group"> 
+                                        {{form.jlh_rombel.label(class="form-control-label")}}
+                                        {% if form.jlh_rombel.errors %}
+                                            {{form.jlh_rombel(class="form-control is-invalid")}}
+                                
+                                        <div class="invalid-feedback">
+                                            {% for error in form.jlh_rombel.errors %}
+                                            <span>{{error}}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                            {{form.jlh_rombel(class="form-control")}}
+                                        {% endif %}
+                                    </div>
+                                    <div class="form-group">
+                                        {{form.submit(class="btn btn-primary")}}
+                                    </div>
+
+                                    </div>
+                                </div>
+                            </div>
+  
+    
+    </div>
+                    <!-- /.container-fluid -->
+{% endblock%}
+    

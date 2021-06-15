@@ -1,0 +1,64 @@
+{% extends "t_user2/base.html" %}
+
+{% block konten%}
+<section id="works">
+
+    <div class="container">
+        
+        <!-- section title -->
+        <h2 class="section-title wow fadeInUp">Data Umum</h2>
+
+        <div class="spacer" data-height="60"></div>
+
+        <div class="container">
+                
+            
+            <div class="card-body">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table>
+                            <table class="table table-hover">
+                                <tr>
+                                    <th>NPSN:</th><td>{{datasekolah.npsn}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Nama Sekolah:</th><td>{{datasekolah.sekolah}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Alamat Sekolah:</th><td>{{datasekolah.alamat}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Kecamatan:</th><td>{{datasekolah.kecamatan_id}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Jenis Sekolah:</th><td>{{datasekolah.jenissklh}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Nama Kepsek:</th><td>{{datasekolah.namakepsek}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Akreditas:</th><td>{{datasekolah.akresklh_id}}</td>
+                                </tr>
+                                <td>
+                                    {{datasekolah.foto}}
+                                    <img src="{{url_for('static', filename='foto/' +datasekolah.foto)}}" alt="..." width="300px" height="300px">
+                                   </td>
+                               
+                            </table>
+                          </div>
+                          <a class="btn btn-warning" href="{{url_for('guser.home')}}">Kembali</a>
+                        </table>
+                       
+            </div>
+        </div>
+            <!-- row end -->
+
+            <div class="spacer" data-height="70"></div>
+        
+        </div>
+  
+
+    </div>
+
+</section>
+{% endblock%}

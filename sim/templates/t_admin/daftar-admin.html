@@ -1,0 +1,109 @@
+
+{% extends "t_admin/base.html" %}
+
+{% block konten%}
+    
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+    
+                        <!-- Page Heading -->
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800">Daftar Admin</h1>
+                            <!--bagian bisa dimasukan form seacrh dari masing-masing data-->
+                            <p></p>
+                        </div>
+    
+                        <!-- Content Row -->
+                    
+                        <div class="row">
+    
+                            <!-- Data Kategori -->
+                            <div class="col-xl-8 col-lg-8">
+                                <div class="card shadow mb-8">
+                                    <!-- Card Header - Dropdown -->
+                                    <div
+                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">Daftar Admin</h6>
+                                       
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <!--form inputan-->
+                                       <form method="POST" enctype="multipart/form-data">
+                                        {{form.hidden_tag()}}
+                                        <div class="form-group">
+                                            {{form.nama.label(class="form-control-label")}}
+                                            {{form.nama(class="form-control")}}
+                                        </div>
+                                        <div class="form-group">
+                                            {{form.email.label(class="form-control-label")}}
+                                            {% if form.email.errors %}
+                                                {{form.email(class="form-control is-invalid")}}
+                                            <div class="invalid-feedback">
+                                                 {% for error in form.email.errors %}
+                                                <span>{{error}}</span>
+                                                {% endfor %}
+                                            </div>
+                                            {%else%}
+                                                 {{form.email(class="form-control")}}
+                                            {%endif%}
+                                        </div>
+                                        <div class="form-group"> 
+                                            {{form.password.label(class="form-control-label")}}
+                                            {% if form.password.errors %}
+                                                {{form.password(class="form-control is-invalid")}}
+                                    
+                                            <div class="invalid-feedback">
+                                                {% for error in form.password.errors %}
+                                                <span>{{error}}</span>
+                                                {% endfor %}
+                                            </div>
+                                            {% else %}
+                                                {{form.password(class="form-control")}}
+                                            {% endif %}
+                                        </div>
+                                        <div class="form-group"> 
+                                            {{form.konf_pass.label(class="form-control-label")}}
+                                            {% if form.konf_pass.errors %}
+                                                {{form.konf_pass(class="form-control is-invalid")}}
+                                    
+                                            <div class="invalid-feedback">
+                                                {% for error in form.konf_pass.errors %}
+                                                <span>{{error}}</span>
+                                                {% endfor %}
+                                            </div>
+                                            {% else %}
+                                                {{form.konf_pass(class="form-control")}}
+                                            {% endif %}
+                                        </div>
+                                        <div class="form-group"> 
+                                            {{form.foto.label(class="form-control-label")}}
+                                            {% if form.foto.errors %}
+                                                {{form.foto(class="form-control is-invalid")}}
+                                    
+                                            <div class="invalid-feedback">
+                                                {% for error in form.foto.errors %}
+                                                <span>{{error}}</span>
+                                                {% endfor %}
+                                            </div>
+                                            {% else %}
+                                                {{form.foto(class="form-control")}}
+                                            {% endif %}
+                                        </div>
+                                        <div class="form-group">
+                                            {{form.simpan(class="btn btn-primary")}}
+                                        </div>
+                                        <a class="btn btn-success" href="{{url_for('gadmin.loginadmin')}}">Kembali</a> 
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <!-- Input Kategori -->
+                        
+    
+    </div></div>      
+    
+    </div>
+                  
+{% endblock%}
+    

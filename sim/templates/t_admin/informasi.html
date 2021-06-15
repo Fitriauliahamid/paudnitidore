@@ -1,0 +1,163 @@
+{% extends "t_admin/base.html" %}
+
+{% block konten%}
+    
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+    
+                        <!-- Page Heading -->
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800">Informasi</h1>
+                            <!--bagian bisa dimasukan form seacrh dari masing-masing data-->
+                            <p></p>
+                        </div>
+    
+                        <!-- Content Row -->
+                    
+                        <div class="row">
+    
+                            <!-- Data Kategori -->
+                            <div class="col-xl-4 col-lg-5">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div
+                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">Input Informasi</h6>
+                                       
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <!--form inputan-->
+                                       <form method="POST" enctype="multipart/form-data" >
+                                        {{form.hidden_tag()}}
+                                        <div class="form-group">
+                                            {{form.judul.label(class="form-control-label")}}
+                                            {% if form.judul.errors %}
+                                                 {{form.judul(class="form-control is-invalid")}}
+                                        
+                                                 <div class="invalid-feedback">
+                                                     {%for error in form.judul.errors %}
+                                                     <span>{{error}}</span>
+                                                     {% endfor %}
+                                                 </div>
+                                            {%else%}
+                                                {{form.judul(class="form-control")}}
+                                            
+                                            {%endif%}
+                                        </div>
+                                    <div class="form-group">
+                                        {{form.informasi.label(class="form-control-label")}}
+                                        {% if form.informasi.errors %}
+                                             {{form.informasi(class="form-control is-invalid")}}
+                                    
+                                             <div class="invalid-feedback">
+                                                 {%for error in form.informasi.errors %}
+                                                 <span>{{error}}</span>
+                                                 {% endfor %}
+                                             </div>
+                                        {%else%}
+                                            {{form.informasi(class="form-control")}}
+                                        
+                                        {%endif%}
+                                    </div>
+
+                                    <div class="form-group">
+                                        {{form.submit(class="btn btn-primary")}}
+                                    </div>
+                                       </form>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <!-- Input Kategori -->
+                            <div class="col-xl-8 col-lg-7">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div
+                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">Informasi</h6>
+                                        
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <div class="card-body">
+                                            <form action="" method="POST" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search pb-4">
+                                                {{form.hidden_tag()}}
+                                                <div class="input-group">
+                                                  <input type="text" class="form-control bg-light border-0 small" placeholder="Cari Untuk..."
+                                                      aria-label="Cari" aria-describedby="basic-addon2" name="tag" id="tag">
+                                                  <div class="input-group-append">
+                                                    <input class="btn btn-primary" type="submit" value="Cari">
+                                                  </div>
+                                                </div>
+                                              </form>
+                                              <strong style="padding-left: 20px;">Cari Untuk : {{ tag }}</strong>
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                                                    <thead>
+                                                        <tr align="center">
+                                                            <th rowspan="2"> Tanggal Post</th>
+                                                            <th rowspan="2">Judul Informasi</th>
+                                                            <th rowspan="2">Informasi</th>
+                                                            <th colspan="3">Keterangan</th>
+                                                        </tr>
+                                                        <tr align="center">
+                                                            <th>Edit</th>
+                                                            <th>Detail</th>
+                                                            <th>Hapus</th>
+                                                        </tr>
+                                                    </thead>
+                                            
+                                                    <tbody>
+                                                        {% for dk in informasi.items %}
+                                                        <tr>
+                                                            <td>{{dk.tgl_post}}</td>
+                                                            <td>{{dk.judul}}</td>
+                                                            <td>{{dk.informasi}}</td>
+                                                            <td><a class="btn btn-sm btn-warning" href="{{url_for('gadmin.informasiedit', ed_id=dk.id)}}">Edit</a>  </td>
+                                                            <td><a class="btn btn-sm btn-danger" href="{{url_for('gadmin.informasi_detail', ed_id=dk.id)}}">Detail</a></td>
+                                                            <td><a class="btn btn-sm btn-danger" href="/informasii/{{dk.id}}">Hapus</a></td>
+                                                            
+                                                        </tr>
+                                                        {% endfor %}
+                                                    </tbody>
+                                                    </table>
+                                    </div>
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination">
+                                          {% if informasi.has_prev %}
+                                            <li class="page-item"><a class="page-link" href="{{ url_for('gadmin.informasi', page=informasi.prev_num)}}">Previous</a></li>
+                                          {% else %}
+                                            <li class="page-item disabled"><a class="page-link">Previous</a>
+                                          {% endif %}
+                                            </li>
+                        
+                                          {% for page in informasi.iter_pages(left_edge=3, right_edge=3) %}
+                                          {% if page %}
+                                              {% if page==informasi.page %}
+                                              <li class="page-item active"><a class="page-link" href="{{ url_for('gadmin.informasi', page=page)}}">{{ page }}</a></li>
+                                              {% else %}
+                                              <li class="page-item"><a class="page-link" href="{{ url_for('gadmin.informasi', page=page)}}">{{ page }}</a></li>
+                                              {% endif %}
+                                          {% else %}
+                                          <li class="page-item disabled" id="example_ellipsis"><a class="page-link" href="#">...</a></li>
+                                          {% endif %}
+                                          {% endfor %}
+                        
+                                          {% if informasi.has_next %}
+                                          <li class="page-item"><a class="page-link" href="{{ url_for('gadmin.informasi', page=informasi.next_num)}}">Next</a></li>
+                                          {% else %}
+                                          <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                                          {% endif %}
+                                        </ul>
+                                      </nav>
+                                </div>
+                            </div>
+                        </div>
+    
+    </div></div>      
+    
+    </div>
+                    <!-- /.container-fluid -->
+{% endblock%}
+    

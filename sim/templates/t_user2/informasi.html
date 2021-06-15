@@ -1,0 +1,74 @@
+{% extends "t_user2/base.html" %}
+
+{% block konten%}
+
+<!-- Service Start -->
+<div class="service" id="service">
+    <div class="container">
+        <div class="section-header text-center ">
+            <p>What I do</p>
+            <h2>INFORMASI</h2>
+        </div>
+        <div class="row">
+            <form action="" method="POST" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search pb-4">
+                <div class="input-group">
+                  <input type="text" class="form-control bg-light border-0 small" placeholder="Cari dengan Judul ..."
+                      aria-label="Cari" aria-describedby="basic-addon2" name="tag" id="tag">
+                  <div class="input-group-append">
+                    <input class="btn btn-primary" type="submit" value="Cari">
+                  </div>
+                </div>
+              </form>
+              <strong style="padding-left: 20px;">Cari Untuk : {{ tag }}</strong>
+            <div class="col-lg-12 ">
+                {% for data in datainformasi.items %}
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fa fa-laptop"></i>
+                    </div>
+                    <div class="service-text">
+                        <h3>{{data.judul}}</h3>
+                        <p>
+                            {{data.tgl_post}}
+                        </p>
+                        <a class="btn btn-warning" href="{{url_for('guser.informasi_detail', ed_id=data.id)}}">Detail</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  {% if datainformasi.has_prev %}
+                    <li class="page-item"><a class="page-link" href="{{ url_for('guser.datainformasi', page=datainformasi.prev_num)}}">Previous</a></li>
+                  {% else %}
+                    <li class="page-item disabled"><a class="page-link">Previous</a>
+                  {% endif %}
+                    </li>
+
+                  {% for page in datainformasi.iter_pages(left_edge=3, right_edge=3) %}
+                  {% if page %}
+                      {% if page==datainformasi.page %}
+                      <li class="page-item active"><a class="page-link" href="{{ url_for('guser.datainformasi', page=page)}}">{{ page }}</a></li>
+                      {% else %}
+                      <li class="page-item"><a class="page-link" href="{{ url_for('guser.datainformasi', page=page)}}">{{ page }}</a></li>
+                      {% endif %}
+                  {% else %}
+                     <li class="page-item disabled" id="example_ellipsis"><a class="page-link" href="#">...</a></li>
+                  {% endif %}
+                  {% endfor %}
+
+                  {% if datainformasi.has_next %}
+                  <li class="page-item"><a class="page-link" href="{{ url_for('guser.datainformasi', page=datainformasi.next_num)}}">Next</a></li>
+                  {% else %}
+                  <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                  {% endif %}
+                </ul>
+              </nav>
+           
+            
+        </div>
+    </div>
+</div>
+<!-- Service End -->
+
+{% endblock %}
