@@ -31,28 +31,6 @@
                                     <!-- Card Body -->
                                    
                                         <div class="card-body">                                            <!--form inputan-->
-                                           <form method="POST" enctype="multipart/form-data">
-                                            {{form.hidden_tag()}}
-                                            <div class="form-group">
-                                                {{form.tahun.label(class="form-control-label")}}
-                                                {% if form.tahun.errors %}
-                                                     {{form.tahun(class="form-control is-invalid")}}
-                                            
-                                                     <div class="invalid-feedback">
-                                                         {%for error in form.tahun.errors %}
-                                                         <span>{{error}}</span>
-                                                         {% endfor %}
-                                                     </div>
-                                                {%else%}
-                                                    {{form.tahun(class="form-control")}}
-                                                
-                                                {%endif%}
-                                            </div>
-                                   
-                                        <div class="form-group">
-                                            {{form.submit(class="btn btn-primary")}}
-                                        </div>
-                                           </form>
                                         </div>>
         
                                             <div class="table-responsive">
@@ -71,7 +49,6 @@
                                                             <td>{{dk.tahun}}</td>
                     
                                                             <td><a class="btn btn-sm btn-warning" href="{{url_for('gadmin.dtumum_filteredit', ed_id=dk.id)}}">Edit</a> </td>
-                                                            <td> <td><a class="btn btn-sm btn-danger" href="/dtumumfilter/{{dk.id}}">Hapus</a></td></td>
                                                         </tr>
                                                         {% endfor %}
                                                     </tbody>
