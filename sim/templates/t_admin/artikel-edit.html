@@ -1,0 +1,102 @@
+{% extends "t_admin/base.html" %}
+
+{% block konten%}
+    
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+    
+                        <!-- Page Heading -->
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800">Edit Data Berita</h1>
+                            <!--bagian bisa dimasukan form seacrh dari masing-masing data-->
+                            <p></p>
+                        </div>
+    
+                        <!-- Content Row -->
+                    
+                        <div class="row">
+    
+                            <!-- Data Kategori -->
+                            <div class="col-xl-8 col-lg-5">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div
+                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">Input Data Berita</h6>
+                                       
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <!--form inputan-->
+                                       <form method="POST" enctype="multipart/form-data">
+                                        {{form.hidden_tag()}}
+                                        <div class="form-group" >
+                                            {{form.judul.label(class="form-control-label")}}
+                                            {% if form.judul.errors %}
+                                                 {{form.judul(class="form-control is-invalid")}}
+                                        
+                                                 <div class="invalid-feedback">
+                                                     {%for error in form.judul.errors %}
+                                                     <span>{{error}}</span>
+                                                     {% endfor %}
+                                                 </div>
+                                            {%else%}
+                                                {{form.judul(class="form-control")}}
+                                            
+                                            {%endif%}
+                                        </div>
+                                    <div class="form-group">
+                                        {{form.desk.label(class="form-control-label")}}
+                                        {% if form.desk.errors %}
+                                             {{form.desk(class="form-control is-invalid")}}
+                                    
+                                             <div class="invalid-feedback">
+                                                 {%for error in form.desk.errors %}
+                                                 <span>{{error}}</span>
+                                                 {% endfor %}
+                                             </div>
+                                        {%else%}
+                                            {{form.desk(class="form-control")}}
+                                        
+                                        {%endif%}
+                                    </div>
+                                    <div class="form-group"> 
+                                        {{form.link.label(class="form-control-label")}}
+                                        {% if form.link.errors %}
+                                            {{form.link(class="form-control is-invalid")}}
+                                
+                                        <div class="invalid-feedback">
+                                            {% for error in form.link.errors %}
+                                            <span>{{error}}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                            {{form.link(class="form-control")}}
+                                        {% endif %}
+                                    </div>
+                                    <div class="form-group"> 
+                                        {{form.foto.label(class="form-control-label")}}
+                                        {% if form.foto.errors %}
+                                            {{form.foto(class="form-control is-invalid")}}
+                                
+                                        <div class="invalid-feedback">
+                                            {% for error in form.foto.errors %}
+                                            <span>{{error}}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                            {{form.foto(class="form-control")}}
+                                        {% endif %}
+                                    </div>
+                                    <div class="form-group">
+                                        {{form.submit(class="btn btn-primary")}}
+                                    </div>
+
+                                    </div>
+                                </div>
+                            </div>
+    
+                     </div>
+                    <!-- /.container-fluid -->
+{% endblock%}
+    

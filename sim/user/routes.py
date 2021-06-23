@@ -1,8 +1,10 @@
 from re import S
-from sim.admin.routes import dtumum_filter
+
+from flask_wtf import form
+from sim.admin.routes import dtumum_filter, struktur
 from flask import Flask, render_template, redirect, url_for, Blueprint, flash, request
 from sim import app,db,bcrypt
-from sim.models import Tdata_kegiatan, Tdataumumfilter, Tprofil, Tdataumum, Tdatasekolah, Takresklh, Tkecamatan, Tpengaduan, Tadmin, Tberita, Tinformasi
+from sim.models import Tdata_kegiatan, Tdataumumfilter, Tprofil, Tdataumum, Tdatasekolah, Takresklh, Tkecamatan, Tpengaduan, Tadmin, Tberita, Tinformasi, Tstruktur, Tartikel
 from sim.user.forms import pengaduan_F,editpengaduan_F
 import os
 import secrets
@@ -21,18 +23,22 @@ def profill():
 def home(page):
     page = page
     pages = 3
+    dt_struktur=Tstruktur.query.all()
+    datastruktur= Tstruktur.query.paginate(page=page, per_page=4)
     dt_program=Tdata_kegiatan.query.all()
     dataprogram= Tdata_kegiatan.query.order_by(Tdata_kegiatan.id.desc()).paginate(page, pages, error_out=False)
     dt_umum=Tdataumum.query.all()
     dt_informasi=Tinformasi.query.all()
     datainformasi= Tinformasi.query.order_by(Tinformasi.id.desc()).paginate(page, pages, error_out=False)
     dt_berita=Tberita.query.all()
+    dt_artikel=Tartikel.query.all()
+    dataartikel= Tartikel.query.order_by(Tartikel.id.desc()).paginate(page=page, per_page=2)
     databerita= Tberita.query.order_by(Tberita.id.desc()).paginate(page, pages, error_out=False)
     dtfilter=Tdataumumfilter.query.all()
     for filter in dtfilter:
         s = filter
     dtumum_now = Tdataumum.query.filter_by(tahun=str(s.tahun)).all()
-    return render_template("t_user2/landing.html", dt_program=dt_program, dt_umum=dt_umum, dt_informasi=dt_informasi, dtumum_now=dtumum_now, dt_berita=dt_berita, databerita=databerita, dataprogram=dataprogram, datainformasi=datainformasi)
+    return render_template("t_user2/landing.html", dt_program=dt_program, dt_umum=dt_umum, dt_informasi=dt_informasi, dtumum_now=dtumum_now, dt_berita=dt_berita, databerita=databerita, dataprogram=dataprogram, datainformasi=datainformasi,dt_struktur=dt_struktur,datastruktur=datastruktur,dt_artikel=dt_artikel,dataartikel=dataartikel)
 
 @guser.route("/base", methods=['GET', 'POST'])
 def base():
@@ -86,10 +92,19 @@ def informasi_detail(ed_id):
 def dasboard():
     return render_template("t_user/index.html")
 
-@guser.route("/struktur-orgnssi")
-def sorganisasi():
-    return render_template("t_user2/strukturorganisasi.html")
-
+@guser.route("/struktur-orgnssi", methods=['GET', 'POST'], defaults={"page": 1})
+@guser.route("/struktur-orgnssi/<int:page>", methods=['GET', 'POST'])
+def datastruktur(page):
+     page = page
+     pages = 10
+     dataa=Tstruktur.query.all()
+     datastruktur = Tstruktur.query.paginate(page, pages, error_out=False)
+     if request.method == 'POST' and 'tag' in request.form:
+        tag = request.form["tag"]
+        search ="%{}%".format(tag)
+        datastruktur = Tstruktur.query.filter(Tstruktur.judul.like(search)).paginate(page, pages, error_out=False)
+        return render_template("t_user2/strukturorganisasi.html", datastruktur=datastruktur, tag=tag)
+     return render_template("t_user2/strukturorganisasi.html", struktur=dataa, datastruktur=datastruktur)
 
 @guser.route("/datasekolahh", methods=['GET', 'POST'], defaults={"page": 1})
 @guser.route("/datasekolahh/<int:page>", methods=['GET', 'POST'])
@@ -143,6 +158,27 @@ def berita(page):
 def berita_detail(ed_id):
     beritaa=Tberita.query.get_or_404(ed_id)
     return render_template("t_user2/beritaid.html", data=beritaa)
+
+
+@guser.route("/artikel", methods=['GET', 'POST'], defaults={"page": 1})
+@guser.route("/artikel/<int:page>", methods=['GET', 'POST'])
+def dataartikell(page):
+    page = page
+    pages = 5
+    data=Tartikel.query.all()
+    dataartikel = Tartikel.query.order_by(Tartikel.id.desc()).paginate(page, pages, error_out=False)
+    if request.method == 'POST' and 'tag' in request.form:
+        tag = request.form["tag"]
+        search ="%{}%".format(tag)
+        dataartikel = Tartikel.query.filter(Tartikel.judul.like(search)).paginate(page, pages, error_out=False)
+        return render_template("t_user2/artikel.html", dataartikel=dataartikel, tag=tag)
+    return render_template("t_user2/artikel.html", artikel=data, dataartikel=dataartikel)
+
+
+@guser.route("/detail-artikel/<int:ed_id>/detail", methods=['GET', 'POST'])
+def artikel_detail(ed_id):
+    artikel=Tartikel.query.get_or_404(ed_id)
+    return render_template("t_user2/artikelid.html", data=artikel)
 
 
 

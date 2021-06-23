@@ -2,10 +2,10 @@ from re import search
 from flask import Flask, render_template, redirect, url_for, Blueprint, flash, request
 from flask_ckeditor import CKEditorField
 import flask
-from flask_wtf import form
+from flask_wtf import file, form
 from sim import app,db,bcrypt
-from sim.admin.forms import daftar_admin,berita_F, data_umum, data_sekolah, akreditas_sekolah, kecamatan_sekolah, pengaduan_F, login_admin, profil_edit, berita_edit, data_umumedit, data_sekolahedit, akreditas_sekolahedit, kecamatan_sekolahedit,informasi_F, kegiatan_F, informasi_edit,kegiatan_edit,edit_admin,filter_dtumum,df_admin, profil
-from sim.models import Tprofil, Tdataumum, Tdatasekolah, Takresklh, Tkecamatan, Tpengaduan, Tadmin, Tberita,Tdata_kegiatan,Tinformasi,Tdataumumfilter
+from sim.admin.forms import daftar_admin,berita_F, data_umum, data_sekolah, akreditas_sekolah, kecamatan_sekolah, pengaduan_F, login_admin, profil_edit, berita_edit, data_umumedit, data_sekolahedit, akreditas_sekolahedit, kecamatan_sekolahedit,informasi_F, kegiatan_F, informasi_edit,kegiatan_edit,edit_admin,filter_dtumum,df_admin, profil, artikel_F, artikel_edit,struktur_F,struktur_edit
+from sim.models import Tprofil, Tdataumum, Tdatasekolah, Takresklh, Tkecamatan, Tpengaduan, Tadmin, Tberita,Tdata_kegiatan,Tinformasi,Tdataumumfilter,Tstruktur,Tartikel
 import os
 import secrets
 from flask_login import login_user, current_user, logout_user, login_required
@@ -43,7 +43,6 @@ def dashboard():
     return render_template("t_admin/base.html", sekolah=sekolah, data_umum=data_umum, pengaduan=pengaduan, informasi=informasi,kegiatan=kegiatan, berita=berita)
 
 #bagian PROFIL
-
 
 @gadmin.route("/profil-admin", methods=['GET', 'POST'])
 @login_required
@@ -307,6 +306,7 @@ def datasekolah_edit(ed_id):
         form.nama_kepsek.data=datasekolah.namakepsek
         form.akreditas.data=datasekolah.akresklh_id
         form.kecamatan.data=datasekolah.kecamatan_id
+        file_foto=datasekolah.foto
     elif form.validate_on_submit():
         file_foto=simpan_foto(form.foto.data)
         datasekolah.npsn=form.npsn.data
@@ -657,3 +657,137 @@ def hapus_kegiatan(id):
     db.session.commit()
     flash('Data berhasil dihapus', 'warning')
     return redirect(url_for('gadmin.kegiatan'))
+
+
+#Artikel
+@gadmin.route("/artikel-admin", methods=['GET', 'POST'], defaults={"page": 1})
+@gadmin.route("/artikel-admin/<int:page>", methods=['GET', 'POST'])
+@login_required
+def artikel(page):
+    form=artikel_F()
+    page = page
+    pages = 10
+    data=Tartikel.query.all()
+    artikel= Tartikel.query.order_by(Tartikel.id.desc()).paginate(page, pages, error_out=False)
+    if request.method == 'POST' and 'tag' in request.form:
+        tag = request.form["tag"]
+        search = "%{}%".format(tag)
+        artikel = Tartikel.query.filter(Tartikel.judul.like(search)).paginate(page, pages, error_out=False)
+        return render_template("t_admin/artikel.html", artikel=artikel, form=form, tag=tag)
+    if form.validate_on_submit():
+        file_foto=simpan_foto(form.foto.data)
+        add=Tartikel(judul=form.judul.data, desk=form.desk.data,link=form.link.data,foto=file_foto)
+        db.session.add(add)
+        db.session.commit()
+        flash('Data berhasil ditambahkan','warning')
+        return redirect(url_for('gadmin.artikel'))
+    return render_template("t_admin/artikel.html", dataartikel=data, form=form, artikel=artikel)
+
+
+@gadmin.route("/artikeledit-admin/<int:ed_id>/update", methods=['GET', 'POST'])
+@login_required
+def artikeledit(ed_id):
+    artikel=Tartikel.query.get_or_404(ed_id)
+    form=artikel_edit()
+    if request.method=="GET":
+        form.judul.data=artikel.judul
+        form.desk.data=artikel.desk
+        form.link.data=artikel.link
+    elif form.validate_on_submit():
+        file_foto=simpan_foto(form.foto.data)
+        artikel.judul=form.judul.data
+        form.desk.data=artikel.desk
+        artikel.link=form.link.data
+        artikel.foto=file_foto
+        db.session.commit()
+        flash('Data Berhasil Di ubah','warning')
+        return redirect(url_for('gadmin.artikel'))
+    return render_template("t_admin/artikel-edit.html", form=form)
+
+
+
+@gadmin.route("/detail-artikell/<int:ed_id>/detail", methods=['GET', 'POST'])
+@login_required
+def artikel_detaill(ed_id):
+    dataartikel=Tartikel.query.get_or_404(ed_id)
+    return render_template("t_admin/artikel-detail.html", dataartikel=dataartikel)
+
+
+@gadmin.route("/artikell/<id>", methods=['GET', 'POST'])
+@login_required
+def hapus_artikel(id):
+    h_artikel= Tartikel.query.get(id)
+    db.session.delete(h_artikel)
+    db.session.commit()
+    flash('Data berhasil dihapus', 'warning')
+    return redirect(url_for('gadmin.artikel'))
+
+
+@gadmin.route("/struktur-admin", methods=['GET', 'POST'], defaults={"page": 1})
+@gadmin.route("/struktur-admin/<int:page>", methods=['GET', 'POST'])
+@login_required
+def struktur(page):
+    form=struktur_F()
+    page = page
+    pages = 10
+    data=Tstruktur.query.all()
+    struktur= Tstruktur.query.paginate(page, pages, error_out=False)
+    if request.method == 'POST' and 'tag' in request.form:
+        tag = request.form["tag"]
+        search = "%{}%".format(tag)
+        struktur = Tstruktur.query.filter(Tstruktur.nama.like(search)).paginate(page, pages, error_out=False)
+        return render_template("t_admin/struktur.html", struktur=struktur, form=form, tag=tag)
+    if form.validate_on_submit():
+        file_foto=simpan_foto(form.foto.data)
+        add=Tstruktur(jabatan=form.jabatan.data,nama=form.nama.data, nip=form.nip.data,tw=form.tw.data,fb=form.fb.data,ig=form.ig.data,foto=file_foto)
+        db.session.add(add)
+        db.session.commit()
+        flash('Data berhasil ditambahkan','warning')
+        return redirect(url_for('gadmin.struktur'))
+    return render_template("t_admin/struktur.html", datastruktur=data, form=form, struktur=struktur)
+
+
+@gadmin.route("/strukturedit-admin/<int:ed_id>/update", methods=['GET', 'POST'])
+@login_required
+def strukturedit(ed_id):
+    struktur=Tstruktur.query.get_or_404(ed_id)
+    form=struktur_edit()
+    if request.method=="GET":
+        form.jabatan.data=struktur.jabatan
+        form.nama.data=struktur.nama
+        form.nip.data=struktur.nip
+        form.tw.data=struktur.tw
+        form.fb.data=struktur.fb
+        form.ig.data=struktur.ig
+    elif form.validate_on_submit():
+        file_foto=simpan_foto(form.foto.data)
+        struktur.jabatan=form.jabatan.data
+        struktur.nama=form.nama.data
+        struktur.nip=form.nip.data
+        struktur.tw=form.tw.data
+        struktur.fb=form.fb.data
+        struktur.ig=form.ig.data
+        struktur.foto=file_foto
+        db.session.commit()
+        flash('Data Berhasil Di ubah','warning')
+        return redirect(url_for('gadmin.struktur'))
+    return render_template("t_admin/struktur-edit.html", form=form)
+
+
+@gadmin.route("/detail-struktur/<int:ed_id>/detail", methods=['GET', 'POST'])
+@login_required
+def struktur_detail(ed_id):
+    datastruktur=Tstruktur.query.get_or_404(ed_id)
+    return render_template("t_admin/struktur-detail.html", datastruktur=datastruktur)
+
+
+@gadmin.route("/struktur/<id>", methods=['GET', 'POST'])
+@login_required
+def hapus_struktur(id):
+    h_struktur= Tstruktur.query.get(id)
+    db.session.delete(h_struktur)
+    db.session.commit()
+    flash('Data berhasil dihapus', 'warning')
+    return redirect(url_for('gadmin.struktur'))
+
+

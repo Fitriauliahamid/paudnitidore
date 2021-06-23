@@ -1,0 +1,57 @@
+{% extends "t_user2/base.html" %}
+
+{% block konten%}
+<section id="works">
+
+    <div class="container">
+        
+        <!-- section title -->
+        <h2 class="section-title wow fadeInUp">Artikel</h2>
+
+        <div class="spacer" data-height="60"></div>
+
+        <div class="container">
+                
+            
+            <div class="card-body">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table>
+                            <table class="table table-hover">
+                                <tr>
+                                    <th>Tanggal Post:</th><td>{{data.tgl_post}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Judul Artikel:</th><td>{{data.judul}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Link Artikel:</th><td>{{data.link}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Deskripsi Artikel:</th><td>{{data.desk}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Banner Artikel</th>
+                                </tr>
+                                <td>
+                                    <img src="{{url_for('static', filename='foto/' +data.foto)}}" alt="..." width="300px" height="300px">
+                                </td>
+                               
+                            </table>
+                          </div>
+                          <a class="btn btn-warning" href="{{url_for('guser.dataartikell')}}">Kembali</a>
+                        </table>
+                       
+            </div>
+        </div>
+            <!-- row end -->
+
+            <div class="spacer" data-height="70"></div>
+        
+        </div>
+  
+
+    </div>
+
+</section>
+{% endblock%}

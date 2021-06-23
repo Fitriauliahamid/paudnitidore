@@ -88,7 +88,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Kelola Profil:</h6>
                         <a class="collapse-item" href="{{url_for('gadmin.profill')}}">Sambutan & visimisi</a>
-                        <a class="collapse-item" href="#"> Struktur Kelembagaan</a>
+                        <a class="collapse-item" href="{{url_for('gadmin.struktur')}}"> Struktur Kelembagaan</a>
                       
                     </div>
                 </div>
@@ -103,28 +103,15 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Data:</h6>
-                        <a class="collapse-item" href="{{url_for('gadmin.alamatsekolah')}}">Alamat</a>
+                        <a class="collapse-item" href="{{url_for('gadmin.alamatsekolah')}}">Kecamatan</a>
                         <a class="collapse-item" href="{{url_for('gadmin.akreditas')}}">Akreditas</a>
+                        <a class="collapse-item" href="{{url_for('gadmin.dtumum_filter')}}">Kelola Data Umum</a>
                         <a class="collapse-item" href="{{url_for('gadmin.dataumuum')}}">Data Umum</a>
                         <a class="collapse-item" href="{{url_for('gadmin.sekolah')}}">Data Sekolah</a>
                     </div>
                 </div>
             </li>
         </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilitiesss"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Kelola Berita Berita</span>
-                </a>
-                <div id="collapseUtilitiesss" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Berita:</h6>
-                        <a class="collapse-item" href="{{url_for('gadmin.berita')}}">Berita</a>
-                    </div>
-                </div>
-            </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilitiessss"
                     aria-expanded="true" aria-controls="collapseUtilities">
@@ -135,10 +122,11 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Kelola Konten:</h6>
-                        <a class="collapse-item" href="{{url_for('gadmin.dtumum_filter')}}">Kelola Data Umum</a>
-                        <a class="collapse-item" href="{{url_for('gadmin.pengaduan')}}">Pengaduan</a>
-                        <a class="collapse-item" href="{{url_for('gadmin.informasi')}}">Informasi</a>
                         <a class="collapse-item" href="{{url_for('gadmin.kegiatan')}}">Program Kerja</a>
+                        <a class="collapse-item" href="{{url_for('gadmin.informasi')}}">Informasi</a>
+                        <a class="collapse-item" href="{{url_for('gadmin.berita')}}">Berita</a>
+                        <a class="collapse-item" href="{{url_for('gadmin.artikel')}}">Artikel</a>
+                        <a class="collapse-item" href="{{url_for('gadmin.pengaduan')}}">Pengaduan</a>
                     </div>
                    
                 </div>
@@ -146,40 +134,12 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Admin
-            </div>
+          
 
             
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Informasi</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Kegiatan</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-            <!-- Sidebar Message -->
-            <div class="sidebar-card">
-                <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="">
-                <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-                <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
-            </div>
+            
 
         </ul>
         <!-- End of Sidebar -->
@@ -245,58 +205,35 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
+                                <span class="badge badge-danger badge-counter">{{pengaduan}}</span>
                             </a>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
                                 <h6 class="dropdown-header">
-                                    Alerts Center
+                                    Pengaduan Terbaru
                                 </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                <a class="dropdown-item d-flex align-items-center" href="{{url_for('gadmin.pengaduan')}}">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-primary">
                                             <i class="fas fa-file-alt text-white"></i>
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                        <div class="small text-gray-500">Check Pengaduan Terbaru</div>
+                                        <span class="font-weight-bold">Bacalah pengaduan-pengaduan dan buat evaluasi!</span>
                                     </div>
                                 </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 7, 2019</div>
-                                        $290.29 has been deposited into your account!
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        Spending Alert: We've noticed unusually high spending for your account.
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
                             </div>
                         </li>
 
                         <!-- Nav Item - Messages -->
                         <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href="{{url_for('gadmin.pengaduan')}}" id="messagesDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-envelope fa-fw"></i>
                                 <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">7</span>
+                                <span class="badge badge-danger badge-counter">{{pengaduan}}</span>
                             </a>
                             <!-- Dropdown - Messages -->
                         </li>

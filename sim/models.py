@@ -124,3 +124,30 @@ class Tinformasi (db.Model):
         return f"Tinformasi('{self.tgl_post}','{self.judul}','{self.informasi}')"
 
 
+class Tartikel (db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    tgl_post = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    judul = db.Column(db.String(100), nullable=False)
+    desk = db.Column(db.String(120), nullable=False)
+    link = db.Column(db.String(120), nullable=True)
+    foto = db.Column(db.String(30), nullable=True)
+
+    def __repr__(self):
+        return f"Tartikel('{self.tgl_post}','{self.judul}','{self.desk}','{self.link}','{self.foto}')"
+
+
+
+class Tstruktur (db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    foto = db.Column(db.String(30), nullable=True)
+    jabatan = db.Column(db.String(100), nullable=False)
+    nama = db.Column(db.String(120), nullable=False)
+    nip = db.Column(db.String(120), nullable=True)
+    tw = db.Column(db.String(120), nullable=True)
+    fb = db.Column(db.String(120), nullable=True)
+    ig = db.Column(db.String(120), nullable=True)
+
+    def __repr__(self):
+        return f"Tstruktur('{self.foto}','{self.jabatan}','{self.nama}','{self.nip}','{self.tw}','{self.fb}','{self.ig}')"
+
+

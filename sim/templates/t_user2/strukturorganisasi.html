@@ -7,88 +7,67 @@
             <p>My Team</p>
             <h2>Struktur Organisasi</h2>
         </div>
+        <form action="" method="POST" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search pb-4">
+            <div class="input-group">
+              <input type="text" class="form-control bg-light border-0 small" placeholder="Cari dengan Judul ..."
+                  aria-label="Cari" aria-describedby="basic-addon2" name="tag" id="tag">
+              <div class="input-group-append">
+                <input class="btn btn-primary" type="submit" value="Cari">
+              </div>
+            </div>
+          </form>
+          <strong style="padding-left: 20px;">Cari Untuk : {{ tag }}</strong>
         <div class="row">
+            {% for data in datastruktur.items %}
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.0s">
                 <div class="team-item">
                     <div class="team-img">
-                        <img src="{{ url_for ('static', filename="tuser2/img/walikota.jpg")}}" alt="Image">
+                        <img src="{{url_for('static', filename='foto/' +data.foto)}}" alt="..." width="300px" height="300px">
                     </div>
                     <div class="team-text">
-                        <h2>Capt. H. Ali Ibrahim</h2>
-                        <h4>Walikota Tidore</h4>
+                        <h2>{{data.nama}}</h2>
+                        <h4>{{data.jabatan}}</h4>
                         <p>
-                            Lorem ipsum dolor sit amet consec adipis elit. Etiam accum lacus
+                            {{data.nip}}
                         </p>
                         <div class="team-social">
-                            <a class="btn" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn" href="{{data.tw}}"><i class="fab fa-twitter"></i></a>
+                            <a class="btn" href="{{data.fb}}"><i class="fab fa-facebook-f"></i></a>
                             <a class="btn" href=""><i class="fab fa-linkedin-in"></i></a>
-                            <a class="btn" href=""><i class="fab fa-instagram"></i></a>
+                            <a class="btn" href="{{data.ig}}"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.2s">
-                <div class="team-item">
-                    <div class="team-img">
-                        <img src="{{ url_for ('static', filename="tuser2/img/kadis.jpg")}}" alt="Image">
-                    </div>
-                    <div class="team-text">
-                        <h2>Ismial Dukomolamo, S.Pd, MM</h2>
-                        <h4>Kepala Dinas Pendidikan</h4>
-                        <p>
-                            Lorem ipsum dolor sit amet consec adipis elit. Etiam accum lacus
-                        </p>
-                        <div class="team-social">
-                            <a class="btn" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn" href=""><i class="fab fa-linkedin-in"></i></a>
-                            <a class="btn" href=""><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.4s">
-                <div class="team-item">
-                    <div class="team-img">
-                        <img src="{{ url_for ('static', filename="tuser2/img/paud2.png")}}" alt="Image">
-                    </div>
-                    <div class="team-text">
-                        <h2>Ade Akib</h2>
-                        <h4>Sekretaris Dinas Pendidikan</h4>
-                        <p>
-                            Lorem ipsum dolor sit amet consec adipis elit. Etiam accum lacus
-                        </p>
-                        <div class="team-social">
-                            <a class="btn" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn" href=""><i class="fab fa-linkedin-in"></i></a>
-                            <a class="btn" href=""><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.6s">
-                <div class="team-item">
-                    <div class="team-img">
-                        <img src="{{ url_for ('static', filename="tuser2/img/paud2.png")}}" alt="Image">
-                    </div>
-                    <div class="team-text">
-                        <h2>Jahra Mandar, S.Pd</h2>
-                        <h4>Kepala bidang PAUD</h4>
-                        <p>
-                            Lorem ipsum dolor sit amet consec adipis elit. Etiam accum lacus
-                        </p>
-                        <div class="team-social">
-                            <a class="btn" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn" href=""><i class="fab fa-linkedin-in"></i></a>
-                            <a class="btn" href=""><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
+          </div>
+          <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                {% if datastruktur.has_prev %}
+                  <li class="page-item"><a class="page-link" href="{{ url_for('guser.datastruktur', page=datastruktur.prev_num)}}">Previous</a></li>
+                {% else %}
+                  <li class="page-item disabled"><a class="page-link">Previous</a>
+                {% endif %}
+                  </li>
+                {% for page in datastruktur.iter_pages(left_edge=3, right_edge=3) %}
+                {% if page %}
+                    {% if page==datastruktur.page %}
+                    <li class="page-item active"><a class="page-link" href="{{ url_for('guser.datastruktur', page=page)}}">{{ page }}</a></li>
+                    {% else %}
+                    <li class="page-item"><a class="page-link" href="{{ url_for('guser.datastruktur', page=page)}}">{{ page }}</a></li>
+                    {% endif %}
+                {% else %}
+                   <li class="page-item disabled" id="example_ellipsis"><a class="page-link" href="#">...</a></li>
+                {% endif %}
+                {% endfor %}
+      
+                {% if datastruktur.has_next %}
+                <li class="page-item"><a class="page-link" href="{{ url_for('guser.datastruktur', page=datastruktur.next_num)}}">Next</a></li>
+                {% else %}
+                <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                {% endif %}
+              </ul>
+          </nav>
         </div>
-    </div>
 </div>
 {% endblock%}

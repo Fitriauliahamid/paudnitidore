@@ -71,6 +71,7 @@ class data_sekolah(FlaskForm):
     foto=FileField('Foto Sekolah', validators=[FileAllowed(['jpg','png'])])
     submit=SubmitField('Tambah')
 
+
 class data_sekolahedit(FlaskForm):
     npsn=StringField('NPSN', validators=[DataRequired()])
     nama_sekolah=StringField('Nama Kesatuan', validators=[DataRequired()])
@@ -188,4 +189,39 @@ class filter_dtumumm(FlaskForm):
 
 class filter_dtumum(FlaskForm):
     tahun=StringField('Tahun', validators=[DataRequired()])
+    submit=SubmitField('Simpan')
+
+class artikel_F(FlaskForm):
+    foto=FileField('Banner Artikel', validators=[FileAllowed(['jpg','png'])])
+    judul=StringField('Judul', validators=[DataRequired()])
+    desk=TextAreaField('Deskripsi singkat Artikel')
+    link=StringField('Link Artikel', validators=[DataRequired()])
+    submit=SubmitField('Simpan')
+
+class artikel_edit(FlaskForm):
+    foto=FileField('Banner Artikel', validators=[FileAllowed(['jpg','png'])])
+    judul=StringField('Judul', validators=[DataRequired()])
+    desk=TextAreaField('Deskripsi singkat Artikel')
+    link=StringField('Link Artikel', validators=[DataRequired()])
+    submit=SubmitField('Simpan')
+
+
+class struktur_F(FlaskForm):
+    foto=FileField('Foto', validators=[FileAllowed(['jpg','png'])])
+    jabatan=StringField('Jabatan', validators=[DataRequired()])
+    nama=StringField('Nama', validators=[DataRequired()])
+    nip=StringField('NIP', validators=[DataRequired()])
+    tw=StringField('Link Twitter')
+    fb=StringField('Link Facebook')
+    ig=StringField('Link Instagram')
+    submit=SubmitField('Simpan')
+
+class struktur_edit(FlaskForm):
+    foto=FileField('Foto', validators=[FileAllowed(['jpg','png'])])
+    jabatan=StringField('Jabatan', validators=[DataRequired()])
+    nama=StringField('Nama', validators=[DataRequired()])
+    nip=StringField('NIP', validators=[DataRequired()])
+    tw=StringField('Link Twitter')
+    fb=StringField('Link Facebook')
+    ig=StringField('Link Instagram')
     submit=SubmitField('Simpan')
